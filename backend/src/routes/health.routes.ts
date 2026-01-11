@@ -1,12 +1,12 @@
-import { Router, type Request, type Response } from "express";
+import { Router, type Request, type Response } from 'express';
 
 const healthRoutes = Router();
 
 healthRoutes.get('/', (_request: Request, response: Response) => {
-    response.status(200).json({
-        status: 'OK',
-        timestamp: `${new Date().toISOString()}`
-    })
+  response.status(200).json({
+    status: 'OK',
+    timestamp: `${new Date().toISOString()}`
+  });
 });
 
 export default healthRoutes;
