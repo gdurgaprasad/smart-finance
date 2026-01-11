@@ -5,7 +5,7 @@ const healthRoutes = Router();
 healthRoutes.get('/', (_request: Request, response: Response) => {
   response.status(200).json({
     status: 'OK',
-    timestamp: `${new Date().toISOString()}`
+    timestamp: `${new Date().toUTCString()}`
   });
 });
 
