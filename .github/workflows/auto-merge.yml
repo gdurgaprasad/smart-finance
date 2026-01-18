@@ -1,0 +1,24 @@
+name: Auto Merge PR
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review, labeled]
+    branches: [master]
+
+jobs:
+  automerge:
+    # Conditions:
+    # 1. PR from dev -> master
+    # 2. PR has label "Auto Merge"
+    if: |
+      github.event.pull_request.head.ref == 'dev' &&
+      contains(github.event.pull_request.labels.*.name, 'Auto Merge')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Enable auto-merge via API
+        uses: peter-evans/enable-pull-request-automerge@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-number: ${{ github.event.pull_request.number }}
+          merge-method: squash
